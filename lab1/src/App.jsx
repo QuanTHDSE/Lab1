@@ -5,6 +5,27 @@ import './App.css'
 import Nav from './components/Nav/Nav'
 import Orchid from './components/Orchid/Orchid'
 
+
+// export default function App(){
+
+// var count = 1;
+// statue: trang thai
+// React 16.8 tro73 ve62 trc => clas component
+// Hook:...
+// useState, useEffect
+
+//   const [count, setCount] = useState(0)
+
+//   return(
+//     <>
+//       <h1>Count: {count}</h1>
+//       <button className='btn btn-primary' onClick={() => 
+//         setCount(count + 1)
+//         }>+</button>
+//     </>
+//   )
+// }
+
 function App() {
   const DATA = [
     {
@@ -197,10 +218,16 @@ function App() {
 
   ]
 
+  // Trạng thái đóng mở của Modal: true false
+  const [isShow, setIsShow] = useState(false)
+
+  
+
 
   return (
     <>
       <Nav />
+
       <div className='container'>
         <div className='row'>
           {DATA.map((item) => (
@@ -214,8 +241,26 @@ function App() {
               color={item.color}
               numberOfLike={item.numberOfLike}
               origin={item.origin}
+              onClick={() => setIsShow(true)}
             />
           ))}
+        </div>
+        <div className="modal" id="exampleModal" tabindex="-1" style={{ display: isShow ? 'block' : 'none' }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Modal title</h5>
+                <button type="button" onClick={() => setIsShow(false)} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <p>Modal body text goes here.</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" onClick={() => setIsShow(false)} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" className="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
