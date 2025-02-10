@@ -35,7 +35,7 @@ function App() {
       isNatural: false,
       image: "/orchid1.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -47,7 +47,7 @@ function App() {
       isNatural: false,
       image: "/orchid2.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -59,7 +59,7 @@ function App() {
       isNatural: false,
       image: "/orchid3.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -71,7 +71,7 @@ function App() {
       isNatural: false,
       image: "/orchid4.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -83,7 +83,7 @@ function App() {
       isNatural: false,
       image: "orchid5.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -95,7 +95,7 @@ function App() {
       isNatural: false,
       image: "/orchid6.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -107,7 +107,7 @@ function App() {
       isNatural: false,
       image: "/orchid7.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -119,7 +119,7 @@ function App() {
       isNatural: false,
       image: "/orchid8.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -131,7 +131,7 @@ function App() {
       isNatural: false,
       image: "/orchid9.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -143,7 +143,7 @@ function App() {
       isNatural: false,
       image: "/orchid10.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -155,7 +155,7 @@ function App() {
       isNatural: false,
       image: "/orchid11.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -166,7 +166,7 @@ function App() {
       isNatural: false,
       image: "/orchid12.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -177,7 +177,7 @@ function App() {
       isNatural: false,
       image: "/orchid13.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -188,7 +188,7 @@ function App() {
       isNatural: false,
       image: "/orchid14.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -199,7 +199,7 @@ function App() {
       isNatural: false,
       image: "/orchid15.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -210,7 +210,7 @@ function App() {
       isNatural: false,
       image: "/orchid16.png",
       color: "Pink",
-      numberOfLike: 192,
+      numberOfLike: 0,
       origin: "Taiwan",
       category: "Cattleya"
     },
@@ -218,10 +218,20 @@ function App() {
 
   ]
 
+  const [orchids, setOrchids] = useState(DATA)
+
   // Trạng thái đóng mở của Modal: true false
   const [isShow, setIsShow] = useState(false)
 
-  
+  const handleLike = (index) => {
+    setOrchids(orchids.map((orchid, i) =>
+    i === index
+    ? {...orchid, numberOfLike: orchid.numberOfLike + 1}
+    : orchid
+    ))
+  }
+
+
 
 
   return (
@@ -230,8 +240,9 @@ function App() {
 
       <div className='container'>
         <div className='row'>
-          {DATA.map((item) => (
+          {orchids.map((item, index) => (
             <Orchid
+              key={index}
               name={item.name}
               rating={item.rating}
               image={item.image}
@@ -242,6 +253,7 @@ function App() {
               numberOfLike={item.numberOfLike}
               origin={item.origin}
               onClick={() => setIsShow(true)}
+              onLike={() => handleLike(index)}
             />
           ))}
         </div>
